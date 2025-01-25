@@ -1,4 +1,4 @@
-import { Box, Heading, Text, VStack, Image, Link, UnorderedList, ListItem } from '@chakra-ui/react'
+import { Box, Heading, Text, VStack, Image, Link, List, ListItem } from '@chakra-ui/react'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/about')({
@@ -8,7 +8,7 @@ export const Route = createFileRoute('/about')({
 function About() {
   return (
     <Box maxWidth="800px" margin="0 auto" padding="2rem">
-      <VStack spacing={8} align="stretch">
+      <VStack align="stretch">
         <Heading as="h1">About Me</Heading>
         
         <Box display={'flex'} flexDirection={'column'} textAlign="center" gap={2}>
@@ -35,11 +35,12 @@ function About() {
         
         <Box>
           <Heading as="h3" size="md">Skills</Heading>
-          <UnorderedList styleType="none" display="flex" flexWrap="wrap" padding={0} my={2}>
+          <List.Root display="flex" flexWrap="wrap" padding={0} my={2}>
             {['React', 'TypeScript', 'HTML/CSS', 'Node.js', 'Git'].map((skill) => (
               <ListItem 
                 key={skill} 
-                bg="gray.100" 
+                bg="gray.200" 
+                color={'gray.800'}
                 px={3} 
                 py={1} 
                 borderRadius="full" 
@@ -49,7 +50,7 @@ function About() {
                 {skill}
               </ListItem>
             ))}
-          </UnorderedList>
+          </List.Root>
         </Box>
         
         <Box>

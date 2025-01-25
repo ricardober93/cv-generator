@@ -1,19 +1,15 @@
-import { ChakraProvider } from '@chakra-ui/react'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
+import {createRouter, RouterProvider} from '@tanstack/react-router'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import {Provider} from "./components/ui/provider";
+import { Toaster } from "./components/ui/toaster";
 
-
-import {
-  QueryClient,
-  QueryClientProvider
-} from '@tanstack/react-query'
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+// Import your routes
+import {routeTree} from './routeTree.gen'
 
 const queryClient = new QueryClient()
 
-
-// Import your routes
-import { routeTree } from './routeTree.gen'
 
 const router = createRouter({ routeTree, context: { queryClient } })
 
@@ -29,9 +25,10 @@ if (!rootElement.innerHTML) {
   root.render(
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <ChakraProvider>
+          <Provider>
           <RouterProvider router={router} />
-        </ChakraProvider>
+          <Toaster />
+          </Provider>
       </QueryClientProvider>
     </React.StrictMode>,
   )

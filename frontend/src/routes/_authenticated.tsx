@@ -4,9 +4,9 @@ import { Flex, Card, Link } from '@chakra-ui/react'
 
 const Login = () => {
   return <Flex>
-    <Card p={4} bg={'gray.100'}>
+    <Card.Root p={4} bg={'gray.100'} color={"gray.950"} asChild>
       <Link href="api/login">Login</Link>
-    </Card>
+    </Card.Root>
   </Flex>
 }
 
