@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { DeleteIcon } from "@chakra-ui/icons";
-import { Alert, Card, Flex, IconButton, Table, TableCaption, } from "@chakra-ui/react";
+import { Alert, Card, Flex, IconButton, Table, } from "@chakra-ui/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Note } from "../../../../server/models/note";
 import { allNotesQueryOptions, deleteNote, getNotesQueryOption } from "../../api/manager";
@@ -26,8 +26,8 @@ function App() {
         alignItems="center"
         w="100vw"
         h="100vh">
-        <ProgressCircleRoot>
-          <ProgressCircleRing />
+        <ProgressCircleRoot  value={null} >
+          <ProgressCircleRing  />
         </ProgressCircleRoot>
       </Flex>
     );
