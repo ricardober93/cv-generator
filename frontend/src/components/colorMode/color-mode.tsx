@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { RiMoonFill, RiSunFill } from "react-icons/ri"
 
 const ColorModeButton = () => {
   // Estado para manejar el modo de color
@@ -26,10 +27,12 @@ const ColorModeButton = () => {
 
   return (
     <button
+      title="Toggle color mode"
       onClick={toggleColorMode}
-      className="px-4 py-2 bg-blue-500 text-white rounded"
+      type="button"
+      className="px-4 py-2 dark:border-zinc-800 bg-white dark:bg-zinc-800 text-stone-600 dark:text-white rounded"
     >
-      {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      {isDarkMode ? <RiMoonFill /> : <RiSunFill />}
     </button>
   );
 };

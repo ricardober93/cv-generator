@@ -1,9 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { DeleteIcon } from "@chakra-ui/icons";
+import { RiDeleteBin2Fill } from "react-icons/ri";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Note } from "../../../../server/models/note";
-import { allNotesQueryOptions, deleteNote, getNotesQueryOption } from "../../api/manager";
+import { allCurruculumQueryOptions, deleteNote, getCurruculumQueryOption } from "@/api/manager";
 
 export const Route = createFileRoute("/_authenticated/")({
   component: () => <App />,
@@ -11,16 +10,16 @@ export const Route = createFileRoute("/_authenticated/")({
 
 function App() {
   // Assume we have a state to store the notes
-  const { data: notes, isLoading, isError } = useQuery(getNotesQueryOption);
+  const { data: notes, isLoading, isError } = useQuery(getCurruculumQueryOption);
 
-  const { data: allNotes } = useQuery(allNotesQueryOptions);
+  const { data } = useQuery(allCurruculumQueryOptions);
 
   if (isLoading)
     return (
       <section
         className="flex items-center justify-center w-full h-full ">
 
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-2 border-b-2 border-zinc-800"></div>
 
       </section>
     );
@@ -37,16 +36,16 @@ function App() {
 
   return (
     <div
-    className="flex flex-col">
+    className="flex flex-col h-full p-4">
       <div
-      className="flex items-center justify-between">
+      className="flex items-center justify-between dark:text-white ">
         
         <div>
           <h1 className="text-2xl font-bold">Notes</h1>
            {/* crea una stat con tailwind */}
 
            <div className="flex items-center justify-between">
-            <span className="">Total Notes</span>
+            <span className="">Tus hojas de vida</span>
             <p className="text-3xl" >
 
             {notes ? notes.totalNotes : 0}
@@ -55,46 +54,23 @@ function App() {
         </div>
       </div>
 
-        <section className="flex flex-col gap-4 p-4">
-          <span className="">Imperial to metric conversion factors</span>
-          <header>
-            <div className="flex gap-4">
-              <th>Id</th>
-              <th>Title</th>
-              <th>Content</th>
-            </div>
-          </header>
-          <body>
-            {allNotes &&
-              allNotes.notes.map((note: Note) => (
-                <div  key={note.id}>
-                  <td>{note.id}</td>
-                  <td>{note?.title}</td>
-                  <td>{note?.content}</td>
-                  <td>
-                    <DeleteNoteButton id={note.id} />{" "}
-                  </td>
-                </div>
-              ))}
-          </body>
-        </section>
 
     </div>
   );
 }
 
-function DeleteNoteButton({ id }: { id: number }) {
+function DeleteCurriculumButton({ id }: { id: number }) {
  const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: deleteNote,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: allNotesQueryOptions.queryKey,
+        queryKey: allCurruculumQueryOptions.queryKey,
         exact: true,
         refetchType: "all",
       });
       queryClient.invalidateQueries({
-        queryKey: getNotesQueryOption.queryKey,
+        queryKey: getCurruculumQueryOption.queryKey,
         exact: true,
         refetchType: "all",
       });
@@ -119,7 +95,7 @@ function DeleteNoteButton({ id }: { id: number }) {
       aria-label="Delete"
       disabled={mutation.isPending}
       onClick={() => mutation.mutate(id)}>
-      <DeleteIcon color="red"></DeleteIcon>
+      <RiDeleteBin2Fill color="red"></RiDeleteBin2Fill>
     </button>
   );
 }

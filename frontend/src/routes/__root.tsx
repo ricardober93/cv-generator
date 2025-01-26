@@ -23,11 +23,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     const { user } = Route.useRouteContext();
     return(
 
-    <>
+      <main className="min-h-dvh h-full">
       <Navbar user={user}/>
-      <main className="h-min-full container mx-auto dark:bg-gray-800">
         <Outlet />
       </main>
-    </>
   )},
 });

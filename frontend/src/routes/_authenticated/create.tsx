@@ -3,7 +3,7 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useForm } from '@tanstack/react-form'
 import { zodValidator } from '@tanstack/zod-form-adapter'
 import { createNote } from '../../api/manager'
-import { CreateNoteValidationSchema } from '../../../../server/models/note'
+import { CreateNoteValidationSchema } from '../../../../server/models/Curruculum'
 
 export const Route = createFileRoute('/_authenticated/create')({
   component: Create,

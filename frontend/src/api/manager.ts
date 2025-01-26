@@ -1,18 +1,18 @@
 import { queryOptions } from "@tanstack/react-query";
-import { type ApiManager } from "../../../server/app";
+import { type ApiManager } from "@server/app";
 import { hc } from "hono/client";
 
 const managerClient = hc<ApiManager>("/");
 
-const getNotes = async () => {
+const getCurruculum = async () => {
   const response = await managerClient.api.manager["total"].$get();
   const data = await response.json();
   return data;
 };
 
-export const getNotesQueryOption = queryOptions({
-  queryKey: ["notes"],
-  queryFn: getNotes,
+export const getCurruculumQueryOption = queryOptions({
+  queryKey: ["Curruculum"],
+  queryFn: getCurruculum,
 });
 
 const getUser = async () => {
@@ -32,11 +32,11 @@ export const userQueryOptions = queryOptions({
   staleTime: Infinity,
 });
 
-const allNotes = async () => {
+const allCurruculum = async () => {
   const response = await managerClient.api.manager.$get();
 
   if (response.status !== 200) {
-    throw new Error("Failed to fetch allNOtes");
+    throw new Error("Failed to fetch allCurruculum");
   }
 
   const data = await response.json();
@@ -44,9 +44,9 @@ const allNotes = async () => {
   return data;
 };
 
-export const allNotesQueryOptions = queryOptions({
-  queryKey: ["allNotes"],
-  queryFn: allNotes,
+export const allCurruculumQueryOptions = queryOptions({
+  queryKey: ["allCurruculum"],
+  queryFn: allCurruculum,
 });
 
 export const createNote = async (title: string, content: string) => {

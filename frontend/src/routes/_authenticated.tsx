@@ -1,13 +1,6 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 import { userQueryOptions } from '../api/manager'
-
-const Login = () => {
-  return <section className='flex flex-col gap-4 p-4'>
-    <div className='p-4 bg-gray-100 text-gray-900'>
-      <a href="api/login">Login</a>
-    </div>
-  </section>
-}
+import { Login } from '@components/Login/Login'
 
 const Component = () => {
   const { user } = Route.useRouteContext()
@@ -15,7 +8,7 @@ const Component = () => {
       return <Login />
     }
 
-    return <Outlet />
+    return  <Outlet />
   }
 
 

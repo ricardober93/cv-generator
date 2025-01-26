@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { CreateNoteValidationSchema, type Note } from "../models/note";
+import { CreateNoteValidationSchema, type Note } from "../models/Curruculum";
 import { zValidator } from "@hono/zod-validator";
 import { userMiddleware } from "../kinde";
 

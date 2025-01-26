@@ -1,4 +1,3 @@
-
 import { Link as RouterLink } from "@tanstack/react-router";
 import { Logout } from "../logout/Logout.tsx";
 import { ColorModeButton } from "@components/colorMode/color-mode.tsx";
@@ -15,20 +14,35 @@ export function Navbar({
   } | null;
 }) {
   return (
-    <nav
-    className="bg-teal-500 text-white p-4 flex items-center w-full">
-
+    <nav className="bg-amber-400 text-zinc-800 p-4 flex items-center w-full">
       <div className="flex items-center justify-between w-full gap-4">
-
-          <RouterLink className="mr-4  " to="/"> Notes </RouterLink>
+        <RouterLink
+          activeProps={{ className: "font-bold" }}
+          className="mr-4 hover:font-bold font-medium"
+          to="/">
+          {" "}
+          CV Generator{" "}
+        </RouterLink>
 
         <div className="flex items-center gap-4">
-
           <ColorModeButton />
 
-            <RouterLink className="active:font-bold" to="/about"> About </RouterLink>
+          <RouterLink
+            activeOptions={{ exact: true }}
+            activeProps={{ className: "font-bold" }}
+            className="hover:font-bold"
+            to="/about">
+            {" "}
+            About{" "}
+          </RouterLink>
 
-            <RouterLink to="/create"> Create </RouterLink>
+          <RouterLink
+            className="hover:font-bold"
+            activeProps={{ className: "font-bold" }}
+            to="/create">
+            {" "}
+            Create{" "}
+          </RouterLink>
 
           {user && <Logout />}
         </div>
