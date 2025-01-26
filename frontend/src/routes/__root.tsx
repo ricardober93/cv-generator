@@ -1,8 +1,8 @@
-import { Box } from "@chakra-ui/react";
+
 import { type QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import { userQueryOptions } from "../api/manager";
-import { Navbar } from "../components/Navbar/Nabvar";
+import { Navbar } from "@components/Navbar/Nabvar";
 
 interface MyRouterContext {
   queryClient: QueryClient;
@@ -25,9 +25,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
     <>
       <Navbar user={user}/>
-      <Box padding="4">
+      <main className="h-min-full container mx-auto dark:bg-gray-800">
         <Outlet />
-      </Box>
+      </main>
     </>
   )},
 });

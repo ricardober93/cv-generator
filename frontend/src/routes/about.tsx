@@ -1,4 +1,3 @@
-import { Box, Heading, Text, VStack, Image, Link, List, ListItem } from '@chakra-ui/react'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/about')({
@@ -7,59 +6,50 @@ export const Route = createFileRoute('/about')({
 
 function About() {
   return (
-    <Box maxWidth="800px" margin="0 auto" padding="2rem">
-      <VStack align="stretch">
-        <Heading as="h1">About Me</Heading>
+    <div className='container mx-auto p-4'>
+      <section className='flex flex-col'>
+        <h1 className='text-2xl font-bold'>About Me</h1>
         
-        <Box display={'flex'} flexDirection={'column'} textAlign="center" gap={2}>
-          <Image 
+        <div className='flex flex-col text-center gap-2'>
+          <img 
             src="/ribermudez.jpg"
             alt="Ricardo Bermudez"
-            borderRadius="full"
-            boxSize="200px"
-            objectFit="cover"
-            margin="0 auto"
+            className='rounded-full w-32 h-32 object-cover m-auto'
           />
-          <Heading as="h2" size="lg" mt={4}>Ricardo Bermudez</Heading>
-          <Text fontStyle="italic" color="gray.600">Web Developer | React Enthusiast | Coffee Lover</Text>
-        </Box>
+          <h2 className='font-mediem text-xl'>Ricardo Bermudez</h2>
+          <p className='bg-gray-600 font-italic'>Web Developer | React Enthusiast | Coffee Lover</p>
+        </div>
         
-        <Box>
-          <Heading as="h3" size="md">Biography</Heading>
-          <Text my={2}>
+        <div>
+          <h3 className='text-md'>Biography</h3>
+          <p className='text-sm py-2'>
             Hello! I'm a passionate web developer with 7+ years of experience in building
             modern web applications. I specialize in React and TypeScript, and I love
             creating intuitive user interfaces that solve real-world problems.
-          </Text>
-        </Box>
+          </p>
+        </div>
         
-        <Box>
-          <Heading as="h3" size="md">Skills</Heading>
-          <List.Root display="flex" flexWrap="wrap" padding={0} my={2}>
+        <div>
+        <h3 className='text-md'>Skills</h3>
+          <section className='flex wrap p-0 my-2'>
             {['React', 'TypeScript', 'HTML/CSS', 'Node.js', 'Git'].map((skill) => (
-              <ListItem 
+              <li 
+              className='text-sm bg-gray-200 text-gray-800 px-3 py-1 rounded-full mr-2 mb-2'
                 key={skill} 
-                bg="gray.200" 
-                color={'gray.800'}
-                px={3} 
-                py={1} 
-                borderRadius="full" 
-                mr={2} 
-                mb={2}
               >
                 {skill}
-              </ListItem>
+              </li>
             ))}
-          </List.Root>
-        </Box>
+          </section>
+        </div>
         
-        <Box>
-          <Heading as="h3" size="md" mb={2}>Get in Touch</Heading>
-          <Text>Email: ribermudez@petalmail.com</Text>
-          <Link href="https://www.linkedin.com/in/ricardotellez7/" color="blue.500">LinkedIn: ricardotellez7</Link>
-          <Link href="https://github.com/ricardober93" color="blue.500" display="block">GitHub: ricardober93</Link>
-        </Box>
-      </VStack>
-    </Box>
+        <div>
+          <h3 className='text-md mb-2'>Get in Touch</h3>
+          <p>Email: ribermudez@petalmail.com</p>
+          <a href="https://www.linkedin.com/in/ricardotellez7/" className='text-blue-500'>LinkedIn: ricardotellez7</a>
+          <a href="https://github.com/ricardober93" className='text-blue-500'>GitHub: ricardober93</a>
+        </div>
+      </section>
+    </div>
   )
 }

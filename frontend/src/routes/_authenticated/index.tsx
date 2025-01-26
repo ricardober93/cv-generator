@@ -1,13 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { DeleteIcon } from "@chakra-ui/icons";
-import { Alert, Card, Flex, IconButton, Table, } from "@chakra-ui/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Note } from "../../../../server/models/note";
 import { allNotesQueryOptions, deleteNote, getNotesQueryOption } from "../../api/manager";
-import { ProgressCircleRing, ProgressCircleRoot } from "../../components/ui/progress-circle";
-import { StatLabel, StatRoot, StatValueText } from "../../components/ui/stat"
-import { toaster } from "../../components/ui/toaster";
 
 export const Route = createFileRoute("/_authenticated/")({
   component: () => <App />,
@@ -21,85 +17,69 @@ function App() {
 
   if (isLoading)
     return (
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        w="100vw"
-        h="100vh">
-        <ProgressCircleRoot  value={null} >
-          <ProgressCircleRing  />
-        </ProgressCircleRoot>
-      </Flex>
+      <section
+        className="flex items-center justify-center w-full h-full ">
+
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+
+      </section>
     );
   if (isError)
     return (
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        w="100vw"
-        h="100vh">
-        <Alert.Root>
-          <Alert.Indicator />
-          <Alert.Content>
-            <Alert.Title>Tuvimos un problema</Alert.Title>
-            <Alert.Description>Ha ocurrido errorOO.</Alert.Description>
-          </Alert.Content>
-        </Alert.Root>
-      </Flex>
+      <section 
+        className="flex items-center justify-center w-full h-full">
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <strong className="font-bold">Error!</strong>
+          <span className="block sm:inline">No se ha podido cargar las notas.</span>
+        </div>
+      </section>
     );
 
   return (
-    <Flex
-      direction="column"
-      w="100vw"
-      h="100vh"
-      p={5}>
-      <Flex
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        mb={5}>
-        <Card.Root
-          p={5}
-          shadow="md"
-          borderWidth="1px"
-          borderRadius="md"
-          flex="1">
-          <StatRoot>
-            <StatLabel fontSize="xl">Total Notes</StatLabel>
-            <StatValueText fontSize="4xl" 
-            value={notes ? notes.totalNotes : 0}
-            />
-          </StatRoot>
-        </Card.Root>
-      </Flex>
+    <div
+    className="flex flex-col">
+      <div
+      className="flex items-center justify-between">
+        
+        <div>
+          <h1 className="text-2xl font-bold">Notes</h1>
+           {/* crea una stat con tailwind */}
 
-        <Table.Root >
-          <Table.Caption>Imperial to metric conversion factors</Table.Caption>
-          <Table.Header>
-            <Table.Row>
-              <Table.ColumnHeader>Id</Table.ColumnHeader>
-              <Table.ColumnHeader>Title</Table.ColumnHeader>
-              <Table.ColumnHeader>Content</Table.ColumnHeader>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
+           <div className="flex items-center justify-between">
+            <span className="">Total Notes</span>
+            <p className="text-3xl" >
+
+            {notes ? notes.totalNotes : 0}
+            </p>
+          </div>
+        </div>
+      </div>
+
+        <section className="flex flex-col gap-4 p-4">
+          <span className="">Imperial to metric conversion factors</span>
+          <header>
+            <div className="flex gap-4">
+              <th>Id</th>
+              <th>Title</th>
+              <th>Content</th>
+            </div>
+          </header>
+          <body>
             {allNotes &&
               allNotes.notes.map((note: Note) => (
-                <Table.Row  key={note.id}>
-                  <Table.Cell>{note.id}</Table.Cell>
-                  <Table.Cell>{note?.title}</Table.Cell>
-                  <Table.Cell>{note?.content}</Table.Cell>
-                  <Table.Cell>
-                    {" "}
+                <div  key={note.id}>
+                  <td>{note.id}</td>
+                  <td>{note?.title}</td>
+                  <td>{note?.content}</td>
+                  <td>
                     <DeleteNoteButton id={note.id} />{" "}
-                  </Table.Cell>
-                </Table.Row>
+                  </td>
+                </div>
               ))}
-          </Table.Body>
-        </Table.Root>
+          </body>
+        </section>
 
-    </Flex>
+    </div>
   );
 }
 
@@ -118,29 +98,28 @@ function DeleteNoteButton({ id }: { id: number }) {
         exact: true,
         refetchType: "all",
       });
-
+/* 
       toaster.create({
         description: "Se ha eliminado la nota correctamente.",
         type: "success",
-      });
+      }); */
     },
     onError: () => {
-      toaster.create({
+   /*    toaster.create({
         title: "Error al eliminar la nota.",
         description: "No se ha podido eliminar la nota.",
         type: "error",
         duration: 9000,
-      });
+      }); */
     },
   });
 
   return (
-    <IconButton
-      variant="ghost"
+    <button className="cursor-pointer text-red-500 hover:text-red-700"
       aria-label="Delete"
       disabled={mutation.isPending}
       onClick={() => mutation.mutate(id)}>
       <DeleteIcon color="red"></DeleteIcon>
-    </IconButton>
+    </button>
   );
 }

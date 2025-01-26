@@ -1,8 +1,7 @@
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Provider } from "./components/ui/provider";
-import { Toaster } from "./components/ui/toaster";
+import './index.css'
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // Import your routes
@@ -24,10 +23,7 @@ if (!rootElement.innerHTML) {
   root.render(
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <Provider>
-          <RouterProvider router={router} />
-          <Toaster />
-        </Provider>
+        <RouterProvider router={router} />
       </QueryClientProvider>
     </React.StrictMode>
   );

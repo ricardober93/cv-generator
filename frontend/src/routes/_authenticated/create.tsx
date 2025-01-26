@@ -2,7 +2,6 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router'
 
 import { useForm } from '@tanstack/react-form'
 import { zodValidator } from '@tanstack/zod-form-adapter'
-import { Button, Flex, Input, Textarea, VStack } from '@chakra-ui/react'
 import { createNote } from '../../api/manager'
 import { CreateNoteValidationSchema } from '../../../../server/models/note'
 
@@ -28,29 +27,24 @@ function Create() {
     },
   })
   return (
-    <Flex flexDirection={'column'} gap={4} p={4}>
-      <VStack
-        as={'form'}
-        alignItems={'flex-start'}
-        maxW={'container.xl'}
-        mx={'auto'}
-        gap={4}
-        p={4}
+    <section className='flex flex-col gap-4 p-4'>
+      <form
+      className='flex flex-col gap-4'
         onSubmit={(e) => {
           e.preventDefault()
           e.stopPropagation()
           form.handleSubmit()
         }}
       >
-        <Flex>
+        <div className='flex flex-col gap-2'>
           <form.Field
             name="title"
             validators={{
               onChange: CreateNoteValidationSchema.shape.title,
             }}
             children={(field) => (
-              <Flex flexDirection={'column'} gap={2}>
-                <Input
+              <div className='flex flex-col gap-2'>
+                <input
                   name={field.name}
                   value={field.state.value}
                   onBlur={field.handleBlur}
@@ -60,20 +54,20 @@ function Create() {
                 {field.state.meta.isTouched ? (
                   <em>{field.state.meta.errors}</em>
                 ) : null}
-              </Flex>
+              </div>
             )}
           />
-        </Flex>
+        </div>
 
-        <Flex>
+        <div>
           <form.Field
             name="content"
             validators={{
               onChange: CreateNoteValidationSchema.shape.content,
             }}
             children={(field) => (
-              <Flex flexDirection={'column'} gap={2}>
-                <Textarea
+              <div className='flex flex-col gap-2'>
+                <textarea
                   name={field.name}
                   value={field.state.value}
                   onBlur={field.handleBlur}
@@ -83,19 +77,19 @@ function Create() {
                 {field.state.meta.isTouched ? (
                   <em>{field.state.meta.errors}</em>
                 ) : null}
-              </Flex>
+              </div>
             )}
           />
-        </Flex>
+        </div>
         <form.Subscribe
           selector={(state) => [state.canSubmit, state.isSubmitting]}
           children={([canSubmit, isSubmitting]) => (
-            <Button type="submit" disabled={!canSubmit}>
+            <button className='' type="submit" disabled={!canSubmit}>
               {isSubmitting ? '...' : 'Crear Nota'}
-            </Button>
+            </button>
           )}
         />
-      </VStack>
-    </Flex>
+      </form>
+    </section>
   )
 }

@@ -1,13 +1,12 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 import { userQueryOptions } from '../api/manager'
-import { Flex, Card, Link } from '@chakra-ui/react'
 
 const Login = () => {
-  return <Flex>
-    <Card.Root p={4} bg={'gray.100'} color={"gray.950"} asChild>
-      <Link href="api/login">Login</Link>
-    </Card.Root>
-  </Flex>
+  return <section className='flex flex-col gap-4 p-4'>
+    <div className='p-4 bg-gray-100 text-gray-900'>
+      <a href="api/login">Login</a>
+    </div>
+  </section>
 }
 
 const Component = () => {
