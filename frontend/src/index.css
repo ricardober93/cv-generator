@@ -2,9 +2,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-*, *::before, *::after {
-  @apply box-border;
-}
 
 body,
 #root {

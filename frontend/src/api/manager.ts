@@ -1,19 +1,9 @@
 import { queryOptions } from "@tanstack/react-query";
 import { type ApiManager } from "@server/app";
+import { CreatCurriculumInput } from "@server/models/Curruculum";
 import { hc } from "hono/client";
 
 const managerClient = hc<ApiManager>("/");
-
-const getCurruculum = async () => {
-  const response = await managerClient.api.manager["total"].$get();
-  const data = await response.json();
-  return data;
-};
-
-export const getCurruculumQueryOption = queryOptions({
-  queryKey: ["Curruculum"],
-  queryFn: getCurruculum,
-});
 
 const getUser = async () => {
   const response = await managerClient.api.me.$get();
@@ -49,11 +39,24 @@ export const allCurruculumQueryOptions = queryOptions({
   queryFn: allCurruculum,
 });
 
-export const createNote = async (title: string, content: string) => {
+export const createCurriculum = async ( {
+  name,
+  email,
+  phone,
+  address,
+  education,
+  experience,
+  skills,
+}: CreatCurriculumInput ) => {
   const response = await managerClient.api.manager["create"].$post({
     json: {
-      title,
-      content,
+      name,
+      email,
+      phone,
+      address,
+      education,
+      experience,
+      skills,
     },
   });
   const data = await response.json();

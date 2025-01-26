@@ -2,8 +2,8 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router'
 
 import { useForm } from '@tanstack/react-form'
 import { zodValidator } from '@tanstack/zod-form-adapter'
-import { createNote } from '../../api/manager'
-import { CreateNoteValidationSchema } from '../../../../server/models/Curruculum'
+import { createCurriculum } from '../../api/manager'
+import { CreateCurriculumValidationSchema } from '@server/models/Curruculum'
 
 export const Route = createFileRoute('/_authenticated/create')({
   component: Create,
@@ -15,11 +15,24 @@ function Create() {
   const form = useForm({
     validatorAdapter: zodValidator(),
     defaultValues: {
-      title: '',
-      content: '',
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
+      education: [],
+      experience: [],
+      skills: [],
     },
     onSubmit: async ({ value }) => {
-      const response = await createNote(value.title, value.content)
+      const response = await createCurriculum({
+        name: value.name,
+        email: value.email,
+        phone: value.phone,
+        address: value.address,
+        education: value.education,
+        experience: value.experience,
+        skills: value.skills,
+      })
 
       console.log(response)
 
@@ -38,9 +51,9 @@ function Create() {
       >
         <div className='flex flex-col gap-2'>
           <form.Field
-            name="title"
+            name="name"
             validators={{
-              onChange: CreateNoteValidationSchema.shape.title,
+              onChange: CreateCurriculumValidationSchema.shape.name,
             }}
             children={(field) => (
               <div className='flex flex-col gap-2'>
@@ -61,9 +74,9 @@ function Create() {
 
         <div>
           <form.Field
-            name="content"
+            name="email"
             validators={{
-              onChange: CreateNoteValidationSchema.shape.content,
+              onChange: CreateCurriculumValidationSchema.shape.email,
             }}
             children={(field) => (
               <div className='flex flex-col gap-2'>

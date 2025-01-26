@@ -1,81 +1,88 @@
 import { Hono } from "hono";
-import { CreateNoteValidationSchema, type Note } from "../models/Curruculum";
+import { CreateCurriculumValidationSchema, type Curriculum } from "../models/Curruculum";
 import { zValidator } from "@hono/zod-validator";
 import { userMiddleware } from "../kinde";
 
 import { db } from "../db";
-import { notes as notesTable } from "../db/schema";
+import { curriculum as curriculumTable } from "../db/schema";
 import { eq } from "drizzle-orm";
 
 export const manager = new Hono()
   .get("/", userMiddleware, async (c) => {
     const user = c.get("user");
-    const notes = await db.select().from(notesTable).where(eq(notesTable.userId, user.id));
+    const curriculums = await db.select().from(curriculumTable).where(eq(curriculumTable.userId, user.id));
+
+    if (!curriculums) {
+      return c.json(
+        {
+          curriculums,
+        },
+        200
+      );
+    }
+
     return c.json(
       {
-        notes,
+        curriculums,
       },
       200
     );
-  }) // GET /book
+  }) 
   .get("/:id{[0-9]+}", userMiddleware, async (c) => {
-    // GET /manager/:id
-    const id = Number(c.req.param("id"));
-    const note = await db.select().from(notesTable).where(eq(notesTable.id, id));
 
-    if (!note) {
+    const id = c.req.param("id");
+    const curriculum = await db.select().from(curriculumTable).where(eq(curriculumTable.id, id));
+
+    if (!curriculum) {
       return c.status(404);
     }
     return c.json(
       {
-        note,
+        curriculum,
       },
       200
     );
   })
-  .get("/total", userMiddleware, async (c) => {
-    const user = c.get("user");
-    const totalNotes = (await db.select().from(notesTable).where(eq(notesTable.userId, user.id))).length;
-
-    return await c.json(
-      {
-        totalNotes,
-      },
-      200
-    );
-  })
-  .post("/create", userMiddleware, zValidator("json", CreateNoteValidationSchema), async (c) => {
-    const body = (await c.req.json()) as Note;
+  .post("/create", userMiddleware, zValidator("json", CreateCurriculumValidationSchema), async (c) => {
+    const body = (await c.req.json()) as Curriculum;
     const user = c.get("user");
 
-    const newNote = await db.insert(notesTable).values({
+    const newCurriculum = await db.insert(curriculumTable).values({
       userId: user.id,
-      title: body.title,
-      content: body.content,
+      address: body.address,
+      education: body.education,
+      email: body.email,
+      experience: body.experience,
+      name: body.name,
+      skills: body.skills,
+      phone: body.phone,
     });
     return c.json(
       {
-        newNote,
+        newCurriculum,
       },
       200
     );
   }) // POST
   .put("/:id{[0-9]+}", userMiddleware, async (c) => {
-    const id = Number(c.req.param("id"));
-    const body = (await c.req.json()) as Note;
+    const id = c.req.param("id");
+    const body = (await c.req.json()) as Curriculum;
 
-    const note = await db.select().from(notesTable).where(eq(notesTable.id, id));
+    const note = await db.select().from(curriculumTable).where(eq(curriculumTable.id, id));
 
     if (!note) {
       return c.status(404);
     }
     const updatedNote = await db
-      .update(notesTable)
+      .update(curriculumTable)
       .set({
-        title: body.title,
-        content: body.content,
+        name: body.name,
+        email: body.email,
+        phone: body.phone,
+        address: body.address,
+        education: body.education,
       })
-      .where(eq(notesTable.id, id));
+      .where(eq(curriculumTable.id, id));
     return c.json(
       {
         updatedNote,
@@ -84,15 +91,15 @@ export const manager = new Hono()
     );
   }) // PUT
   .delete("/:id", userMiddleware, async (c) => {
-    const id = Number(c.req.param("id"));
+    const id = c.req.param("id");
 
-    const note = await db.select().from(notesTable).where(eq(notesTable.id, id));
+    const note = await db.select().from(curriculumTable).where(eq(curriculumTable.id, id));
 
     if (!note) {
       return c.status(404);
     }
 
-    const deletedNote = await db.delete(notesTable).where(eq(notesTable.id, id));
+    const deletedNote = await db.delete(curriculumTable).where(eq(curriculumTable.id, id));
 
     return c.json(
       {

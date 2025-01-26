@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "start": "bun run index.ts",
-    "dev": "bun --watch index.ts"
+    "dev": "bun --watch index.ts",
+    "generate": "bunx  drizzle-kit generate"
   },
   "devDependencies": {
     "@flydotio/dockerfile": "^0.5.8",
