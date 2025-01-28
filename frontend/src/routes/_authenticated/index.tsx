@@ -86,7 +86,7 @@ function App() {
   );
 }
 
-function DeleteCurriculumButton({ id }: { id: string }) {
+function DeleteCurriculumButton({ id }: { id: number }) {
  const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: deleteNote,

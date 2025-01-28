@@ -6,6 +6,7 @@
 body,
 #root {
   @apply min-h-dvh;
+  @apply min-h-dvh;
   @apply h-dvh;
   @apply bg-white dark:bg-zinc-800;
 }

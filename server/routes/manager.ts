@@ -10,16 +10,7 @@ import { eq } from "drizzle-orm";
 export const manager = new Hono()
   .get("/", userMiddleware, async (c) => {
     const user = c.get("user");
-    const curriculums = await db.select().from(curriculumTable).where(eq(curriculumTable.userId, user.id));
-
-    if (!curriculums) {
-      return c.json(
-        {
-          curriculums,
-        },
-        200
-      );
-    }
+    const curriculums  = await db.select().from(curriculumTable).where(eq(curriculumTable.userId, user.id));
 
     return c.json(
       {
@@ -49,7 +40,7 @@ export const manager = new Hono()
 
     const newCurriculum = await db.insert(curriculumTable).values({
       userId: user.id,
-      address: body.address,
+      city: body.city,
       education: body.education,
       email: body.email,
       experience: body.experience,
@@ -79,7 +70,7 @@ export const manager = new Hono()
         name: body.name,
         email: body.email,
         phone: body.phone,
-        address: body.address,
+        city: body.city,
         education: body.education,
       })
       .where(eq(curriculumTable.id, id));

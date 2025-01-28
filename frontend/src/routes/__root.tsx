@@ -23,7 +23,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     const { user } = Route.useRouteContext();
     return(
 
-      <main className="h-full">
+      <main className="min-h-full h-dvh">
       <Navbar user={user}/>
         <Outlet />
       </main>

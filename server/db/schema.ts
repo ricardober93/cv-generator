@@ -8,7 +8,7 @@ export const curriculum = pgTable(
     name: varchar("name", { length: 255 }).notNull(),
     email: varchar("email", { length: 255 }).notNull(),
     phone: varchar("phone", { length: 20 }).notNull(),
-    address: text("address").notNull(),
+    city: text("city").notNull(),
     education: jsonb("education").notNull(),
     experience: jsonb("experience").notNull(),
     skills: jsonb("skills").notNull(),

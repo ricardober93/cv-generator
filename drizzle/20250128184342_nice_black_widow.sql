@@ -1,0 +1,1 @@
+ALTER TABLE "curriculum" RENAME COLUMN "address" TO "city";
