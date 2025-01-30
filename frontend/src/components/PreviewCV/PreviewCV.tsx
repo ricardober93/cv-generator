@@ -3,7 +3,8 @@ import { Curriculum } from "@server/models/Curruculum";
 // components/PreviewCV.tsx
 export const PreviewCV = ({ formData }: { formData : Curriculum }) => {
     return (
-      <div className="w-full flex-1 col-span-2 p-6 bg-gray-50 dark:bg-zinc-700 rounded-lg">
+   <section className="w-full flex-1 col-span-2 bg-gray-200 rounded-lg  p-6">
+        <div className="h-full p-6 bg-gray-50 shadow dark:bg-zinc-700 rounded-lg">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold">{formData.name ? formData.name : "Nombre completo"}</h1>
@@ -61,6 +62,7 @@ export const PreviewCV = ({ formData }: { formData : Curriculum }) => {
         )}
         </Section>
       </div>
+   </section>
     )
   }
   
