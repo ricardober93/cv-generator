@@ -87,10 +87,11 @@ function Create() {
   }
 
   return (
-    <section className="flex h-dvh gap-4 p-6">
-      <div>
+    <section className="grid grid-cols-3 justify-center h-full gap-4 px-2 py-4 mx-auto">
+      <div className="py-4">
+        <h2 className="text-2xl font-bold text-center"> Ingresa tu informacion para la hoja de vida </h2>
         <form
-          className=" flex flex-col gap-4"
+          className=" flex flex-col gap-4 mt-6"
           onSubmit={(e) => {
             e.preventDefault();
             e.stopPropagation();
