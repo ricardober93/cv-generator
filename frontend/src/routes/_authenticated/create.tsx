@@ -89,7 +89,7 @@ function Create() {
   return (
     <section className="grid grid-cols-3 justify-center h-full gap-4 px-2 py-4 mx-auto">
       <div className="py-4">
-        <h2 className="text-2xl font-bold text-center"> Ingresa tu informacion para la hoja de vida </h2>
+        <h2 className="text-2xl font-bold text-left text-pretty dark:text-gray-50"> Ingresa tu informacion para la hoja de vida </h2>
         <form
           className=" flex flex-col gap-4 mt-6"
           onSubmit={(e) => {
@@ -107,7 +107,7 @@ function Create() {
                 placeholder="name"
               />
 
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">Name</span>
+              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">Name</span>
             </label>
           </div>
 
@@ -122,7 +122,7 @@ function Create() {
                 placeholder="email"
               />
 
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">Email</span>
+              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">Email</span>
             </label>
           </div>
           <div>
@@ -135,7 +135,7 @@ function Create() {
                 className="w-[70%] peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
                 placeholder="phone"
               />
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">Phone</span>
+              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">Phone</span>
             </label>
           </div>
           <div>
@@ -149,7 +149,7 @@ function Create() {
                 placeholder="city"
               />
 
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">City</span>
+              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">City</span>
             </label>
           </div>
 

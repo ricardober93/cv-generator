@@ -14,6 +14,23 @@ export const PreviewCV = ({ formData }: { formData : Curriculum }) => {
             <p>{formData.city ? formData.city : "ciudad" }</p>
           </div>
         </div>
+
+         {/* Experiencia */}
+         <Section title="Experiencia">
+        {formData.experience.length > 0 && (
+            formData.experience.map((exp, index) => (
+              <div key={index} className="mb-4">
+                <h3 className="font-bold">{exp.company}</h3>
+                <p>{exp.position}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  {exp.startDate} - {exp.endDate}
+                </p>
+                <p className="mt-2">{exp.description}</p>
+                </div>
+              ))
+            )}
+            </Section>
+            
   
         {/* Educación */}
         <Section title="Educación">
@@ -30,21 +47,7 @@ export const PreviewCV = ({ formData }: { formData : Curriculum }) => {
           )}
           </Section>
   
-        {/* Experiencia */}
-          <Section title="Experiencia">
-        {formData.experience.length > 0 && (
-            formData.experience.map((exp, index) => (
-              <div key={index} className="mb-4">
-                <h3 className="font-bold">{exp.company}</h3>
-                <p>{exp.position}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  {exp.startDate} - {exp.endDate}
-                </p>
-                <p className="mt-2">{exp.description}</p>
-                </div>
-              ))
-            )}
-            </Section>
+       
   
         {/* Habilidades */}
         <Section title="Habilidades">
