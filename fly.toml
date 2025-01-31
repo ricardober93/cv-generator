@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for app-template on 2024-09-22T21:21:12-05:00
+# fly.toml app configuration file generated for cv-generator-uz0g0a on 2025-01-31T18:21:26Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'app-template'
+app = 'cv-generator-uz0g0a'
 primary_region = 'bog'
 
 [build]
@@ -20,3 +20,4 @@ primary_region = 'bog'
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
+  memory_mb = 1024
