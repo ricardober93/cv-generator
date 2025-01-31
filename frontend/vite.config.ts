@@ -22,6 +22,7 @@ export default defineConfig({
   },
   build: {
     outDir: path.resolve(import.meta.dir, 'dist'),
+    modulePreload: true,
   },
   server: {
     proxy: {

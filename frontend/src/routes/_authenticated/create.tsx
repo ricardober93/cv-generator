@@ -90,12 +90,8 @@ function Create() {
     <section className="grid grid-cols-3 justify-center h-full gap-4 px-2 py-4 mx-auto">
       <div className="py-4">
         <h2 className="text-2xl font-bold text-left text-pretty dark:text-gray-50"> Ingresa tu informacion para la hoja de vida </h2>
-        <form
-          className=" flex flex-col gap-4 mt-6"
-          onSubmit={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-          }}>
+        <section
+          className=" flex flex-col gap-4 mt-6">
           <div className="flex flex-col gap-2">
             <label
               htmlFor="name"
@@ -200,9 +196,9 @@ function Create() {
           <button
             className="inline-block rounded border border-amber-500 px-12 py-3 text-sm font-medium text-amber-600 hover:bg-amber-500 hover:text-white focus:outline-none focus:ring active:bg-amber-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-gray-300 disabled:text-gray-300 disabled:hover:bg-gray-300"
             type="button">
-            {"Actualizar"}
+            Actualizar
           </button>
-        </form>
+        </section>
 
         {/* Modal para Experiencias */}
         {isModalOpen && (
