@@ -9,6 +9,7 @@ export interface Curriculum {
   email: string;
   phone: string;
   city: string;
+  profile: string;
   education: Education[];
   experience: Experience[];
   skills: string[];
@@ -24,6 +25,7 @@ export const CurriculumValidationSchema = z.object({
   email: z.string().email(),
   phone: z.string(),
   city: z.string(),
+  profile: z.string(),
   education: z.array(z.lazy(() => EducationValidationSchema)),
   experience: z.array(z.lazy(() => ExperienceValidationSchema)),
   skills: z.array(z.string()),

@@ -6,7 +6,7 @@ export const PreviewCV = ({ formData }: { formData : Curriculum }) => {
    <section className="w-full flex-1 col-span-2 bg-gray-200 rounded-lg  p-6">
         <div className="h-full p-6 bg-gray-50 shadow dark:bg-zinc-700 rounded-lg">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-left mb-8">
           <h1 className="text-3xl font-bold">{formData.name ? formData.name : "Nombre completo"}</h1>
           <div className="mt-2">
             <p>{formData.email ? formData.email : "example@mail.com"}</p>
@@ -14,6 +14,11 @@ export const PreviewCV = ({ formData }: { formData : Curriculum }) => {
             <p>{formData.city ? formData.city : "ciudad" }</p>
           </div>
         </div>
+          <Section title="Perfil">
+
+            { formData.profile ? formData.profile : "ciudad"    }
+
+          </Section>
 
          {/* Experiencia */}
          <Section title="Experiencia">
