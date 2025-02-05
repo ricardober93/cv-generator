@@ -1,0 +1,1 @@
+ALTER TABLE "curriculum" ADD COLUMN "profile" varchar(255) NOT NULL;
