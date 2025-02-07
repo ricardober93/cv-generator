@@ -11,17 +11,12 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as AboutImport } from './routes/about'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedCreateImport } from './routes/_authenticated/create'
+import { Route as AuthenticatedEditIdImport } from './routes/_authenticated/edit/$id'
 
 // Create/Update Routes
-
-const AboutRoute = AboutImport.update({
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const AuthenticatedRoute = AuthenticatedImport.update({
   id: '/_authenticated',
@@ -38,6 +33,11 @@ const AuthenticatedCreateRoute = AuthenticatedCreateImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
+const AuthenticatedEditIdRoute = AuthenticatedEditIdImport.update({
+  path: '/edit/$id',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -47,13 +47,6 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof AuthenticatedImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
     '/_authenticated/create': {
@@ -70,6 +63,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexImport
       parentRoute: typeof AuthenticatedImport
     }
+    '/_authenticated/edit/$id': {
+      id: '/_authenticated/edit/$id'
+      path: '/edit/$id'
+      fullPath: '/edit/$id'
+      preLoaderRoute: typeof AuthenticatedEditIdImport
+      parentRoute: typeof AuthenticatedImport
+    }
   }
 }
 
@@ -78,11 +78,13 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteChildren {
   AuthenticatedCreateRoute: typeof AuthenticatedCreateRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedEditIdRoute: typeof AuthenticatedEditIdRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedCreateRoute: AuthenticatedCreateRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedEditIdRoute: AuthenticatedEditIdRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -91,47 +93,45 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteWithChildren
-  '/about': typeof AboutRoute
   '/create': typeof AuthenticatedCreateRoute
   '/': typeof AuthenticatedIndexRoute
+  '/edit/$id': typeof AuthenticatedEditIdRoute
 }
 
 export interface FileRoutesByTo {
-  '/about': typeof AboutRoute
   '/create': typeof AuthenticatedCreateRoute
   '/': typeof AuthenticatedIndexRoute
+  '/edit/$id': typeof AuthenticatedEditIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
-  '/about': typeof AboutRoute
   '/_authenticated/create': typeof AuthenticatedCreateRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/edit/$id': typeof AuthenticatedEditIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/about' | '/create' | '/'
+  fullPaths: '' | '/create' | '/' | '/edit/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/about' | '/create' | '/'
+  to: '/create' | '/' | '/edit/$id'
   id:
     | '__root__'
     | '/_authenticated'
-    | '/about'
     | '/_authenticated/create'
     | '/_authenticated/'
+    | '/_authenticated/edit/$id'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
-  AboutRoute: typeof AboutRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
-  AboutRoute: AboutRoute,
 }
 
 export const routeTree = rootRoute
@@ -146,19 +146,16 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_authenticated",
-        "/about"
+        "/_authenticated"
       ]
     },
     "/_authenticated": {
       "filePath": "_authenticated.tsx",
       "children": [
         "/_authenticated/create",
-        "/_authenticated/"
+        "/_authenticated/",
+        "/_authenticated/edit/$id"
       ]
-    },
-    "/about": {
-      "filePath": "about.tsx"
     },
     "/_authenticated/create": {
       "filePath": "_authenticated/create.tsx",
@@ -166,6 +163,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/": {
       "filePath": "_authenticated/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/edit/$id": {
+      "filePath": "_authenticated/edit/$id.tsx",
       "parent": "/_authenticated"
     }
   }

@@ -28,15 +28,6 @@ export function Navbar({
           <ColorModeButton />
 
           <RouterLink
-            activeOptions={{ exact: true }}
-            activeProps={{ className: "font-bold" }}
-            className="hover:font-bold"
-            to="/about">
-            {" "}
-            About{" "}
-          </RouterLink>
-
-          <RouterLink
             className="hover:font-bold"
             activeProps={{ className: "font-bold" }}
             to="/create">

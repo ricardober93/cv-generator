@@ -10,7 +10,7 @@ import { eq } from "drizzle-orm";
 export const manager = new Hono()
   .get("/", userMiddleware, async (c) => {
     const user = c.get("user");
-    const curriculums  = await db.select().from(curriculumTable).where(eq(curriculumTable.userId, user.id));
+    const curriculums = await db.select().from(curriculumTable).where(eq(curriculumTable.userId, user.id));
 
     return c.json(
       {
@@ -18,29 +18,29 @@ export const manager = new Hono()
       },
       200
     );
-  }) 
-  .get("/:id{[0-9]+}", userMiddleware, async (c) => {
-
+  })
+  .get("/:id", userMiddleware, async (c) => {
     const id = c.req.param("id");
-    const curriculum = await db.select().from(curriculumTable).where(eq(curriculumTable.id, id));
+    console.log(id);
+
+    const [curriculum] = await db.select().from(curriculumTable).where(eq(curriculumTable.id, id));
+
+    console.log(curriculum);
 
     if (!curriculum) {
       return c.status(404);
     }
-    return c.json(
-      {
-        curriculum,
-      },
-      200
-    );
+    return c.json(curriculum, 200);
   })
   .post("/create", userMiddleware, zValidator("json", CreateCurriculumValidationSchema), async (c) => {
     const body = (await c.req.json()) as Curriculum;
+
     const user = c.get("user");
 
     const newCurriculum = await db.insert(curriculumTable).values({
       userId: user.id,
       city: body.city,
+      profile: body.profile,
       education: body.education,
       email: body.email,
       experience: body.experience,
@@ -55,7 +55,7 @@ export const manager = new Hono()
       200
     );
   }) // POST
-  .put("/:id{[0-9]+}", userMiddleware, async (c) => {
+  .patch("/:id", userMiddleware, zValidator( "json", CreateCurriculumValidationSchema ) ,async (c) => {
     const id = c.req.param("id");
     const body = (await c.req.json()) as Curriculum;
 

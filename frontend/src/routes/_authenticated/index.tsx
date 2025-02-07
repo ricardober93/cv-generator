@@ -11,9 +11,6 @@ export const Route = createFileRoute("/_authenticated/")({
 function App() {
   // Assume we have a state to store the notes
   const { data, isLoading, isError } = useQuery(allCurruculumQueryOptions);
-
-
-  console.log(data);
   
   if (isLoading)
     return (
@@ -58,15 +55,11 @@ function App() {
           </div>
         ) : (
           data?.curriculums?.map((curriculum: any) => (
-            <div
+            <RouterLink
+             to={`/edit/${curriculum.id}`}
               key={curriculum.id}
               className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
               <div className="flex items-center">
-                <img
-                  className="h-12 w-12 rounded-full object-cover"
-                  src="https://randomuser.me/api/portraits"
-                  alt=""
-                />
                 <div className="ml-2">
                   <span className="block font-bold">{curriculum.name}</span>
                   <span className="block text-sm text-gray-500">{curriculum.email}</span>
@@ -75,7 +68,7 @@ function App() {
               <div>
                 <DeleteCurriculumButton id={curriculum.id} />
               </div>
-            </div>
+            </RouterLink>
           ))
         )
         }

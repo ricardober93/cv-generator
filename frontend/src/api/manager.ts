@@ -1,6 +1,7 @@
+import { jsonb } from 'drizzle-orm/pg-core';
 import { queryOptions } from "@tanstack/react-query";
 import { type ApiManager } from "@server/app";
-import { CreatCurriculumInput } from "@server/models/Curruculum";
+import { CreatCurriculumInput, Curriculum } from "@server/models/Curruculum";
 import { hc } from "hono/client";
 
 const managerClient = hc<ApiManager>("/");
@@ -39,11 +40,27 @@ export const allCurruculumQueryOptions = queryOptions({
   queryFn: allCurruculum,
 });
 
+
+export const getCurriculum = async (id: string) => {
+  const response = await managerClient.api.manager[":id"].$get({
+    param: { id },
+  });
+
+  if (response.status !== 200) {
+    throw new Error("Failed to fetch curriculum");
+  }
+
+  const data = await response.json();
+  return data;
+};
+
+
 export const createCurriculum = async ( {
   name,
   email,
   phone,
-  address,
+  profile,
+  city,
   education,
   experience,
   skills,
@@ -53,7 +70,8 @@ export const createCurriculum = async ( {
       name,
       email,
       phone,
-      address,
+      profile,
+      city,
       education,
       experience,
       skills,
@@ -62,6 +80,22 @@ export const createCurriculum = async ( {
   const data = await response.json();
   return data;
 };
+
+export const updateCurriculum = async (id: string, body: Curriculum) => {
+  const response = await managerClient.api.manager[":id"].$patch({
+    param: { id },
+    json: body,
+  });
+
+  if (response.status !== 200) {
+    throw new Error("Failed to update curriculum");
+  }
+
+  const data = await response.json();
+  return data
+}
+
+
 
 export const deleteNote = async (id: number) => {
   const response = await managerClient.api.manager[":id"].$delete({

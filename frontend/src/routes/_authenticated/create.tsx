@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Curriculum } from "@server/models/Curruculum";
 import { ChangeEvent, useState } from "react";
 import { Experience } from "@server/models/Experencie";
@@ -10,12 +10,18 @@ import { EducationModal } from "@/components/EducationModal/EducationModal";
 import { Education } from "@server/models/Education";
 import { SkillModal } from "@/components/SkillsModal/SkillsModal";
 import { LuTrash } from "react-icons/lu";
+import { createCurriculum } from "@/api/manager";
 
 export const Route = createFileRoute("/_authenticated/create")({
   component: Create,
 });
 
 function Create() {
+
+  const navigate = useNavigate()
+
+
+  const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEducationOpen, setEducationModal] = useState(false);
   const [isSkillOpen, setSkillOpen] = useState(false);
@@ -180,9 +186,26 @@ function Create() {
     });
   };
 
-  const handleSaveCV = () => {
+  const handleSaveCV = async () => {
     console.log(state);
-    
+    setIsLoading(true);
+    await createCurriculum({
+      name: state.name,
+      email: state.email,
+      phone: state.phone,
+      profile: state.profile,
+      city: state.city,
+      education: state.education,
+      experience: state.experience,
+      skills: state.skills,
+    });
+
+    setIsLoading(false);
+  
+      navigate({
+        to:"/"
+      });
+  
   }
 
   return (
@@ -389,6 +412,7 @@ function Create() {
           <button
             className="inline-block rounded border border-amber-500 px-12 py-3 text-sm font-medium text-amber-600 hover:bg-amber-500 hover:text-white focus:outline-none focus:ring active:bg-amber-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-gray-300 disabled:text-gray-300 disabled:hover:bg-gray-300"
             type="button"
+            disabled={isLoading}
             onClick={handleSaveCV}
             >
             Actualizar

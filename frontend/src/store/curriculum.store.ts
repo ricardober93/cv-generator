@@ -6,6 +6,7 @@ export const store = new Store({
     name: "",
     email: "",
     phone: "",
+    profile: "",
     city: "",
     education: [] as Education[],
     experience: [] as Experience[],
