@@ -25,8 +25,6 @@ export const manager = new Hono()
 
     const [curriculum] = await db.select().from(curriculumTable).where(eq(curriculumTable.id, id));
 
-    console.log(curriculum);
-
     if (!curriculum) {
       return c.status(404);
     }

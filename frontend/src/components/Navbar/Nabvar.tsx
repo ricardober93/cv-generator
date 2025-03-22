@@ -14,7 +14,7 @@ export function Navbar({
   } | null;
 }) {
   return (
-    <nav className="bg-amber-400 text-zinc-800 p-4 flex items-center w-full">
+    <nav className="bg-base-100 dark:bg-base-200 text-primary-content p-4 flex items-center w-full">
       <div className="flex items-center justify-between w-full gap-4">
         <RouterLink
           activeProps={{ className: "font-bold" }}

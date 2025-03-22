@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 import tsconfigPaths from "vite-tsconfig-paths"
 import tailwindcss from '@tailwindcss/vite'
-
+import { visualizer } from 'rollup-plugin-visualizer'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -16,6 +16,7 @@ export default defineConfig({
     TanStackRouterVite(),
     tsconfigPaths(),
     tailwindcss(),
+    visualizer({ open: true }), // Add the visualizer plugin
   ],
   resolve: {
     alias: {
@@ -27,6 +28,13 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, 'dist'),
     modulePreload: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+        },
+      },
+    },
   },
   server: {
     proxy: {

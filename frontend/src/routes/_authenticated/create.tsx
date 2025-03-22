@@ -14,12 +14,22 @@ import { createCurriculum } from "@/api/manager";
 
 export const Route = createFileRoute("/_authenticated/create")({
   component: Create,
+  beforeLoad: async () => {
+    store.setState(() => ({
+      name: "",
+      email: "",
+      phone: "",
+      profile: "",
+      city: "",
+      education: [] as Education[],
+      experience: [] as Experience[],
+      skills: [] as string[],
+    }))
+  },
 });
 
 function Create() {
-
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,10 +39,10 @@ function Create() {
 
   const state = useStore(store, (state) => state);
 
-  //const navigate = useNavigate();
-
   const handleExperienceSubmit = (experience: Experience) => {
-    const idx = state.experience.findIndex((_, index) => index === editingIndex);
+    const idx = state.experience.findIndex(
+      (_, index) => index === editingIndex
+    );
 
     if (idx !== -1) {
       const newExperiences = [...state.experience];
@@ -151,8 +161,6 @@ function Create() {
   const deleteExperience = (company: string) => {
     const oldState = state.experience;
     const newState = oldState.filter((exp) => exp.company !== company);
-    console.log(oldState);
-    console.log(newState);
 
     store.setState((state) => {
       return {
@@ -165,8 +173,6 @@ function Create() {
   const deleteEducation = (degree: string) => {
     const oldState = state.education;
     const newState = oldState.filter((exp) => exp.degree !== degree);
-    console.log(oldState);
-    console.log(newState);
 
     store.setState((state) => {
       return {
@@ -201,22 +207,25 @@ function Create() {
     });
 
     setIsLoading(false);
-  
-      navigate({
-        to:"/"
-      });
-  
-  }
+
+    navigate({
+      to: "/",
+    });
+  };
 
   return (
     <section className="grid grid-cols-3 justify-center h-full gap-4 px-2 py-4 mx-auto">
-      <div className="py-4">
-        <h2 className="text-2xl font-bold text-left text-pretty dark:text-gray-50"> Ingresa tu informacion para la hoja de vida </h2>
+  <div className="py-4 max-h-full overflow-scroll ">
+        <h2 className="text-2xl font-bold text-left text-pretty dark:text-gray-50">
+          {" "}
+          Ingresa tu informacion para la hoja de vida{" "}
+        </h2>
         <section className=" flex flex-col gap-4 mt-6">
           <div className="flex flex-col gap-2">
             <label
               htmlFor="name"
-              className="relative block rounded-md border  bg-white dark:bg-gray-800 border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2">
+              className="relative block rounded-md border  bg-white dark:bg-gray-800 border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
+            >
               <input
                 name="name"
                 onChange={(e) => updateStateInputs(e)}
@@ -224,14 +233,17 @@ function Create() {
                 placeholder="name"
               />
 
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs bg-white dark:bg-gray-800 dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">Name</span>
+              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs bg-white dark:bg-gray-800 dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                Name
+              </span>
             </label>
           </div>
 
           <div>
             <label
               htmlFor="email"
-              className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2">
+              className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
+            >
               <input
                 name="email"
                 onChange={(e) => updateStateInputs(e)}
@@ -239,26 +251,32 @@ function Create() {
                 placeholder="email"
               />
 
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">Email</span>
+              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                Email
+              </span>
             </label>
           </div>
           <div>
             <label
               htmlFor="phone"
-              className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2">
+              className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
+            >
               <input
                 name="phone"
                 onChange={(e) => updateStateInputs(e)}
                 className="w-[70%] peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
                 placeholder="phone"
               />
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">Phone</span>
+              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                Phone
+              </span>
             </label>
           </div>
           <div>
             <label
               htmlFor="city"
-              className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2">
+              className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
+            >
               <input
                 name="city"
                 onChange={(e) => updateStateInputs(e)}
@@ -266,16 +284,20 @@ function Create() {
                 placeholder="city"
               />
 
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">City</span>
+              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                City
+              </span>
             </label>
           </div>
 
           <div>
-            <span className="pointer-events-none  p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all ">Profile</span>
+            <span className="pointer-events-none  p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all ">
+              Profile
+            </span>
             <label
               htmlFor="profile"
-              className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2">
-
+              className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
+            >
               <textarea
                 name="profile"
                 onChange={(e) => updateStateInputs(e)}
@@ -283,11 +305,8 @@ function Create() {
                 placeholder="profile"
                 rows={4}
               />
-
-             
             </label>
           </div>
-
 
           {/* Sección de Experiencias */}
           <div className="space-y-4 mt-2 border-t border-gray-400">
@@ -296,15 +315,14 @@ function Create() {
               <button
                 type="button"
                 onClick={() => openModalExperience()}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs">
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs"
+              >
                 + Agregar Experiencia
               </button>
             </div>
 
             {state.experience.map((exp: Experience, index: number) => (
-              <div
-                key={index}
-                className="border p-4 rounded-lg">
+              <div key={index} className="border p-4 rounded-lg">
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="font-semibold">{exp.company}</h3>
@@ -317,18 +335,22 @@ function Create() {
                     <button
                       type="button"
                       onClick={() => openModalExperience(index)}
-                      className="text-blue-600 hover:text-blue-800">
+                      className="text-blue-600 hover:text-blue-800"
+                    >
                       Editar
                     </button>
                     <button
                       type="button"
                       onClick={() => deleteEducation(exp.company)}
-                      className="text-red-600 hover:text-red-800 px-2 py-1 rounded">
+                      className="text-red-600 hover:text-red-800 px-2 py-1 rounded"
+                    >
                       Eliminar
                     </button>
                   </div>
                 </div>
-                {exp.description && <p className="mt-2 text-gray-700">{exp.description}</p>}
+                {exp.description && (
+                  <p className="mt-2 text-gray-700">{exp.description}</p>
+                )}
               </div>
             ))}
           </div>
@@ -340,15 +362,14 @@ function Create() {
               <button
                 type="button"
                 onClick={() => openModalEducation()}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs">
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs"
+              >
                 + Agregar Educacion
               </button>
             </div>
 
             {state.education.map((exp: Education, index: number) => (
-              <div
-                key={index}
-                className="border p-4 rounded-lg">
+              <div key={index} className="border p-4 rounded-lg">
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="font-semibold">{exp.degree}</h3>
@@ -361,13 +382,15 @@ function Create() {
                     <button
                       type="button"
                       onClick={() => openModalEducation(index)}
-                      className="text-blue-600 hover:text-blue-800">
+                      className="text-blue-600 hover:text-blue-800"
+                    >
                       Editar
                     </button>
                     <button
                       type="button"
                       onClick={() => deleteExperience(exp.degree)}
-                      className="text-red-600 hover:text-red-800 px-2 py-1 rounded">
+                      className="text-red-600 hover:text-red-800 px-2 py-1 rounded"
+                    >
                       Eliminar
                     </button>
                   </div>
@@ -382,30 +405,34 @@ function Create() {
               <button
                 type="button"
                 onClick={() => openModalSkills()}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs">
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs"
+              >
                 + Agregar Habilidades
               </button>
             </div>
 
             <div className="flex items-center gap-1 p-4 rounded-lg">
-            {state.skills.map((skill: string, index: number) => (
+              {state.skills.map((skill: string, index: number) => (
                 <span
-                 
                   key={index}
-                  className="flex items-center justify-center gap-1 bg-amber-100 dark:bg-amber-800 text-amber-800 dark:text-amber-100 px-3 py-1 rounded-full text-sm">
-                  
-                  <span className="px-2 py-1 cursor-pointer"  onClick={() => openModalSkills(index)} >
-                  {skill}
+                  className="flex items-center justify-center gap-1 bg-amber-100 dark:bg-amber-800 text-amber-800 dark:text-amber-100 px-3 py-1 rounded-full text-sm"
+                >
+                  <span
+                    className="px-2 py-1 cursor-pointer"
+                    onClick={() => openModalSkills(index)}
+                  >
+                    {skill}
                   </span>
 
                   <button
                     type="button"
                     onClick={() => deleteSkill(skill)}
-                    className="text-red-600 hover:text-red-800 px-2 py-1 rounded cursor-pointer">
+                    className="text-red-600 hover:text-red-800 px-2 py-1 rounded cursor-pointer"
+                  >
                     <LuTrash className="w-3 h-3 " />
                   </button>
                 </span>
-            ))}
+              ))}
             </div>
           </div>
 
@@ -414,16 +441,20 @@ function Create() {
             type="button"
             disabled={isLoading}
             onClick={handleSaveCV}
-            >
+          >
             Actualizar
           </button>
         </section>
-  {/* Modal para Experiencias */}
+        {/* Modal para Experiencias */}
         {isModalOpen && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
             <div className="bg-white rounded-lg p-6 w-full max-w-lg">
               <ExperienceModal
-                initialData={editingIndex !== null ? state.experience[editingIndex] : undefined}
+                initialData={
+                  editingIndex !== null
+                    ? state.experience[editingIndex]
+                    : undefined
+                }
                 onSubmit={handleExperienceSubmit}
                 onClose={closeModalExperience}
               />
@@ -433,10 +464,14 @@ function Create() {
 
         {/* Modal para Education */}
         {isEducationOpen && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
+          <div className="fixed inset-0  z-50 bg-black/50 flex items-center justify-center p-4">
             <div className="bg-white rounded-lg p-6 w-full max-w-lg">
               <EducationModal
-                initialData={editingIndex !== null ? state.education[editingIndex] : undefined}
+                initialData={
+                  editingIndex !== null
+                    ? state.education[editingIndex]
+                    : undefined
+                }
                 onSubmit={handleEducationSubmit}
                 onClose={closeModalEducation}
               />
@@ -445,10 +480,14 @@ function Create() {
         )}
 
         {isSkillOpen && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
             <div className="bg-white rounded-lg p-6 w-full max-w-lg">
               <SkillModal
-                initialData={editingIndex !== null ? { skill: state.skills[editingIndex] } : undefined}
+                initialData={
+                  editingIndex !== null
+                    ? { skill: state.skills[editingIndex] }
+                    : undefined
+                }
                 onSubmit={handleSkillSubmit}
                 onClose={closeModalSkills}
               />

@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, nord;
+}
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -8,5 +11,5 @@ body,
   @apply min-h-dvh;
   @apply min-h-dvh;
   @apply h-dvh;
-  @apply bg-white dark:bg-zinc-800;
+  @apply bg-base-100 dark:bg-base-content;
 }

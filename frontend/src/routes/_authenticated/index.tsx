@@ -4,6 +4,7 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { allCurruculumQueryOptions, deleteNote } from "@/api/manager";
 
+
 export const Route = createFileRoute("/_authenticated/")({
   component: () => <App />,
 });
@@ -11,7 +12,7 @@ export const Route = createFileRoute("/_authenticated/")({
 function App() {
   // Assume we have a state to store the notes
   const { data, isLoading, isError } = useQuery(allCurruculumQueryOptions);
-  
+
   if (isLoading)
     return (
       <section
