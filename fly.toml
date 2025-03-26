@@ -8,16 +8,6 @@ primary_region = 'bog'
 
 [build]
 
-[env]
-  KINDE_CLIENT_ID = '63cb8afa44e44c868c140d0e6523af0b'
-  KINDE_CLIENT_SECRET = 'ConMe89BZ6VULXjTw79Qup609QxQCLvFgctiidFX24Ax7xg8ZcP2'
-  KINDE_DOMAIN = 'https://ricardober93.kinde.com'
-  KINDE_ISSUER_URL = 'https://ricardober93.kinde.com'
-  KINDE_LOGOUT_REDIRECT_URI = 'https://cv-generator.fly.dev/'
-  KINDE_REDIRECT_URI = 'https://cv-generator.fly.dev/api/callback'
-  KINDE_SITE_URL = 'https://cv-generator.fly.dev'
-  POSTGRES_URL = 'postgresql://neondb_owner:npg_wodaqA4gD5VH@ep-blue-snowflake-a8am9jph-pooler.eastus2.azure.neon.tech/neondb?sslmode=require'
-
 [http_service]
   internal_port = 3000
   force_https = true
