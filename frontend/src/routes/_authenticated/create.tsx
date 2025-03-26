@@ -215,7 +215,7 @@ function Create() {
 
   return (
     <section className="flex flex-col md:flex-row w-full gap-4 px-2 py-4 mx-auto overflow-hidden">
-    <div className="p-4  flex flex-col flex-1 overflow-y-auto md:w-1/2">
+    <div className="px-4 pb-16  flex flex-col flex-1 overflow-y-auto md:w-1/2">
         <h2 className="text-2xl font-bold text-left text-pretty dark:text-gray-50">
           {" "}
           Ingresa tu informacion para la hoja de vida{" "}
