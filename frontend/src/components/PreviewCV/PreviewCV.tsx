@@ -17,7 +17,7 @@ export const PreviewCV = ({ formData }: { formData : Curriculum }) => {
 
   return (
       
-    <section className="w-full flex-1 col-span-2 bg-gray-200 rounded-lg p-6 relative">
+    <section className="w-full flex-1  bg-gray-200 rounded-lg p-6 relative">
         <button 
             onClick={handleDownload}
             className="absolute top-8 left-1/2 transform -translate-x-1/2 bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center space-x-2 z-10"
@@ -28,7 +28,7 @@ export const PreviewCV = ({ formData }: { formData : Curriculum }) => {
             <span>Download CV</span>
         </button>
 
-        <div className="h-full p-6 bg-gray-50 shadow dark:bg-zinc-700 rounded-lg preview-cv">
+        <div className="h-full w-full p-6 bg-gray-50 shadow dark:bg-zinc-50 rounded-lg preview-cv">
         <div className="text-left mb-8">
           <h1 className="text-3xl font-bold">{formData.name ? formData.name : "Nombre completo"}</h1>
           <div className="mt-2">
@@ -38,7 +38,7 @@ export const PreviewCV = ({ formData }: { formData : Curriculum }) => {
           </div>
         </div>
           <Section title="Perfil">
-            { formData.profile ? formData.profile : "ciudad"    }
+            { formData.profile ? formData.profile : ""    }
           </Section>
 
          <Section title="Experiencia">

@@ -59,11 +59,11 @@ function App() {
             <RouterLink
              to={`/edit/${curriculum.id}`}
               key={curriculum.id}
-              className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+              className="flex items-center justify-between p-4 bg-white dark:bg-base-300 rounded-lg shadow-md">
               <div className="flex items-center">
                 <div className="ml-2">
                   <span className="block font-bold">{curriculum.name}</span>
-                  <span className="block text-sm text-gray-500">{curriculum.email}</span>
+                  <span className="block text-sm text-gray-500 dark:text-base-content">{curriculum.email}</span>
                 </div>
               </div>
               <div>

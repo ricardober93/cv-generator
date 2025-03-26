@@ -214,8 +214,8 @@ function Create() {
   };
 
   return (
-    <section className="grid grid-cols-3 justify-center h-full gap-4 px-2 py-4 mx-auto">
-  <div className="py-4 max-h-full overflow-scroll ">
+    <section className="flex flex-col md:flex-row w-full gap-4 px-2 py-4 mx-auto overflow-hidden">
+    <div className="p-4  flex flex-col flex-1 overflow-y-auto md:w-1/2">
         <h2 className="text-2xl font-bold text-left text-pretty dark:text-gray-50">
           {" "}
           Ingresa tu informacion para la hoja de vida{" "}
@@ -224,7 +224,7 @@ function Create() {
           <div className="flex flex-col gap-2">
             <label
               htmlFor="name"
-              className="relative block rounded-md border  bg-white dark:bg-gray-800 border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
+              className="relative block rounded-md border  bg-white border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
             >
               <input
                 name="name"
@@ -233,7 +233,7 @@ function Create() {
                 placeholder="name"
               />
 
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs bg-white dark:bg-gray-800 dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs bg-white dark:text-base-content text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                 Name
               </span>
             </label>
@@ -242,7 +242,7 @@ function Create() {
           <div>
             <label
               htmlFor="email"
-              className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
+              className="relative block rounded-md border  bg-white border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
             >
               <input
                 name="email"
@@ -251,7 +251,7 @@ function Create() {
                 placeholder="email"
               />
 
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs  bg-white dark:text-base-content text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                 Email
               </span>
             </label>
@@ -259,7 +259,7 @@ function Create() {
           <div>
             <label
               htmlFor="phone"
-              className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
+              className="relative block rounded-md border  bg-white border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
             >
               <input
                 name="phone"
@@ -267,7 +267,7 @@ function Create() {
                 className="w-[70%] peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
                 placeholder="phone"
               />
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs  dark:text-base-content text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                 Phone
               </span>
             </label>
@@ -275,7 +275,7 @@ function Create() {
           <div>
             <label
               htmlFor="city"
-              className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
+              className="relative block rounded-md border  bg-white border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
             >
               <input
                 name="city"
@@ -284,24 +284,24 @@ function Create() {
                 placeholder="city"
               />
 
-              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+              <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 p-0.5 text-xs dark:text-base-content text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                 City
               </span>
             </label>
           </div>
 
           <div>
-            <span className="pointer-events-none  p-0.5 text-xs dark:text-gray-50 text-gray-700 transition-all ">
+            <h2 className="text-md font-bold dark:text-base-100">
               Profile
-            </span>
+            </h2>
             <label
               htmlFor="profile"
-              className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
+              className="relative block rounded-md border  bg-white dark:text-base-content border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 px-3 py-2"
             >
               <textarea
                 name="profile"
                 onChange={(e) => updateStateInputs(e)}
-                className="w-full peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
+                className="w-full peer border-none bg-transparent dark:text-base-content placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
                 placeholder="profile"
                 rows={4}
               />
@@ -311,11 +311,11 @@ function Create() {
           {/* Sección de Experiencias */}
           <div className="space-y-4 mt-2 border-t border-gray-400">
             <div className="flex justify-between items-center pt-2">
-              <h2 className="text-2xl font-bold">Experiencias Laborales</h2>
+              <h2 className="text-2xl font-bold dark:text-base-100">Experiencias Laborales</h2>
               <button
                 type="button"
                 onClick={() => openModalExperience()}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs"
+                  className="btn btn-secondary btn-sm"
               >
                 + Agregar Experiencia
               </button>
@@ -358,11 +358,11 @@ function Create() {
           {/* Sección de Education */}
           <div className="space-y-4 mt-2 border-t border-gray-400">
             <div className="flex justify-between items-center pt-2">
-              <h2 className="text-2xl font-bold">Educacion</h2>
+              <h2 className="text-2xl font-bold dark:text-base-100">Educacion</h2>
               <button
                 type="button"
                 onClick={() => openModalEducation()}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs"
+                  className="btn btn-secondary btn-sm"
               >
                 + Agregar Educacion
               </button>
@@ -401,11 +401,11 @@ function Create() {
 
           <div className="space-y-4 mt-2 border-t border-gray-400">
             <div className="flex justify-between items-center pt-2">
-              <h2 className="text-2xl font-bold">Habilidades</h2>
+              <h2 className="text-2xl font-bold dark:text-base-100">Habilidades</h2>
               <button
                 type="button"
                 onClick={() => openModalSkills()}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs"
+                className="btn btn-secondary btn-sm"
               >
                 + Agregar Habilidades
               </button>
@@ -437,7 +437,7 @@ function Create() {
           </div>
 
           <button
-            className="inline-block rounded border border-amber-500 px-12 py-3 text-sm font-medium text-amber-600 hover:bg-amber-500 hover:text-white focus:outline-none focus:ring active:bg-amber-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:border-gray-300 disabled:text-gray-300 disabled:hover:bg-gray-300"
+            className="btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed disabled:border-gray-300 disabled:text-gray-300 disabled:hover:bg-gray-300"
             type="button"
             disabled={isLoading}
             onClick={handleSaveCV}
@@ -495,8 +495,9 @@ function Create() {
           </div>
         )}
       </div>
-
+      <div className="flex flex-1 overflow-y-auto md:w-1/2 px-4">
       <PreviewCV formData={state as Curriculum} />
+      </div>
     </section>
   );
 }
